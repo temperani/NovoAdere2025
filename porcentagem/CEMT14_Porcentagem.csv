@@ -1,8 +1,8 @@
 Status;Quantidade;% do Total
+Serviço Urgente;3;1.8%
+Serviço Futuro;12;7.3%
+Serviço Executado;7;4.3%
+Serviço LV/Desligar;5;3.0%
 Serviço Executar;128;78.0%
 Serviço Cancelado;9;5.5%
-Serviço Executado;7;4.3%
-Serviço Futuro;12;7.3%
-Serviço LV/Desligar;5;3.0%
-Serviço Urgente;3;1.8%
 TOTAL;164;100%

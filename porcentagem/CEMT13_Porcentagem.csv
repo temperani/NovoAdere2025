@@ -1,3 +1,5 @@
 Status;Quantidade;% do Total
-Serviço Executar;35;100.0%
-TOTAL;35;100%
+Serviço Cancelado;5;6.8%
+Serviço Futuro;26;35.1%
+Serviço Urgente;43;58.1%
+TOTAL;74;100%

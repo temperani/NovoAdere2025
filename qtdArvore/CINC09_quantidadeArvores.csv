@@ -1,3 +1,4 @@
-Serviço;Serviço Cancelado;Serviço Executado;Serviço Executar;Serviço Urgente;Total
-Poda de árvore em area urbana com recolhimento;1;4;206;10;221
-TOTAL;1;4;206;10;221
+Serviço;Serviço Cancelado;Serviço Executado;Serviço Executar;Serviço Futuro;Serviço Urgente;Total
+Poda de cerca viva por metro linear com recolhimento;0;7;0;0;0;7
+Poda de árvore em area urbana com recolhimento;2;30;191;4;10;237
+TOTAL;2;37;191;4;10;244

@@ -24,59 +24,53 @@ df = pd.read_csv('dados_alimentador.csv',delimiter=';')
 nomeAplicativo = input("Digite o Nome do Usuário: ")
 tokenAplicativo = input("Digite o Nome do Token do Aplicativo: ")
 #abrindo o google chrome e definindo a pagina do streetservice
-navegador = webdriver.Chrome()
-navegador.maximize_window()
-navegador.get('https://streetservice.com.br/acesso/login.php')
+driver = webdriver.Chrome()
+driver.maximize_window()
+driver.get('https://streetservice.com.br/acesso/login.php')
 sleep(2.5)
 #procura o elemento username / token na pagina do streetservice e envia os dados fornecidos
-loginStreetService =navegador.find_element(By.XPATH, '//*[@id="username"]')
-senhaStreetService =navegador.find_element(By.XPATH, '//*[@id="token"]')
+loginStreetService =driver.find_element(By.XPATH, '//*[@id="username"]')
+senhaStreetService =driver.find_element(By.XPATH, '//*[@id="token"]')
 loginStreetService.send_keys(nomeAplicativo)
 senhaStreetService.send_keys(tokenAplicativo)
-botaoEntrar = navegador.find_element(By.XPATH,'//*[@id="login-form"]/button')
+botaoEntrar = driver.find_element(By.XPATH,'//*[@id="login-form"]/button')
 botaoEntrar.click()
 sleep(5)
 #entra na pagina status para estrair dados do streetservice
-navegador.get('https://streetservice.com.br/acesso/status.php')
+driver.get('https://streetservice.com.br/acesso/status.php')
 sleep(10)
-equipeStreetService = navegador.find_element(By.XPATH,'//*[@id="equipe"]')
+equipeStreetService = driver.find_element(By.XPATH,'//*[@id="equipe"]')
 equipeStreetService.send_keys("Poda de árvores")
 sleep(0.5)
 
 #For para pegar quantidade de arvores
 for index, row in df.iterrows():
     alimentador = row['Alimentador']
-    alimentadorStreetService = navegador.find_element(By.XPATH,'//*[@id="alimentador"]')
+    alimentadorStreetService = driver.find_element(By.XPATH,'//*[@id="alimentador"]')
     alimentadorStreetService.send_keys(alimentador)
     sleep(0.5)
-    tabelaAlimentador = navegador.find_element(By.XPATH,'//*[@id="tabelaPivot"]')
-    linhas = tabelaAlimentador.find_elements(By.TAG_NAME, "tr")
-    dadosTabela = []
+    tabelaAlimentadorQtd = driver.find_element(By.XPATH,'//*[@id="tabelaPivot"]')
+    linhas = tabelaAlimentadorQtd.find_elements(By.TAG_NAME, "tr")
+    dadosTabelaQtd = []
     for linha in linhas:
         celulas = linha.find_elements(By.XPATH, ".//th | .//td")
         if celulas:
            linha_dados = [celula.text.strip() for celula in celulas]
-           dadosTabela.append(linha_dados)
+           dadosTabelaQtd.append(linha_dados)
     nome_arquivo = caminhoPastaQtdArvore +"/"+ f"{alimentador}_quantidadeArvores.csv"
-    df_tabela = pd.DataFrame(dadosTabela)
+    df_tabela = pd.DataFrame(dadosTabelaQtd)
     df_tabela.to_csv(nome_arquivo, index=False, header=False, encoding='utf-8', sep=';')
     sleep(0.5)
-#For para pegar porcentagem
-for index, row in df.iterrows():
-    alimentador = row['Alimentador']
-    alimentadorStreetService = navegador.find_element(By.XPATH,'//*[@id="alimentador"]')
-    alimentadorStreetService.send_keys(alimentador)
-    sleep(0.5)
-    tabelaAlimentador = navegador.find_element(By.XPATH,'//*[@id="tabelaDados"]')
-    linhas = tabelaAlimentador.find_elements(By.TAG_NAME, "tr")
-    dadosTabela = []
+    tabelaAlimentadorPorcentagem = driver.find_element(By.XPATH,'//*[@id="tabelaDados"]')
+    linhas = tabelaAlimentadorPorcentagem.find_elements(By.TAG_NAME, "tr")
+    dadosTabelaPorcentagem = []
     for linha in linhas:
         celulas = linha.find_elements(By.XPATH, ".//th | .//td")
         if celulas:
            linha_dados = [celula.text.strip() for celula in celulas]
-           dadosTabela.append(linha_dados)
+           dadosTabelaPorcentagem.append(linha_dados)
     nome_arquivo = caminhoPastaPorcentagem +"/"+ f"{alimentador}_Porcentagem.csv"
-    df_tabela = pd.DataFrame(dadosTabela)
+    df_tabela = pd.DataFrame(dadosTabelaPorcentagem)
     df_tabela.to_csv(nome_arquivo, index=False, header=False, encoding='utf-8', sep=';')
     sleep(0.5)
 

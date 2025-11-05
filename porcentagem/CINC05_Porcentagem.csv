@@ -1,9 +1,9 @@
 Status;Quantidade;% do Total
 Serviço Urgente;10;4.2%
+Serviço Futuro;60;25.0%
 Serviço Executado;68;28.3%
 Serviço Aprovado;1;0.4%
-Serviço Futuro;60;25.0%
 Serviço Executar;87;36.3%
-Serviço Reprovado;2;0.8%
 Serviço Cancelado;12;5.0%
+Serviço Reprovado;2;0.8%
 TOTAL;240;100%
